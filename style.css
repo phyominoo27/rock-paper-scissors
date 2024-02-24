@@ -27,6 +27,7 @@ body {
 .status p {
     text-align: center;
     font-size: 25px;
+    padding: 0 80px;
 }
 
 .status .currentRound {
