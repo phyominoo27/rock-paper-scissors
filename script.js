@@ -1,4 +1,6 @@
-// function that Randomly Pick R,P or S
+// RPS Game function
+// Function that Randomly Pick R,P or S
+
 function getComputerChoice() {
   const randomIndex = Math.floor(Math.random() * 3);
   switch (randomIndex) {
@@ -26,32 +28,95 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function playGame() {
-  let playerWin = 0;
+function createGame() {
+  let playerInput;
+  let playerWon = 0;
+  let pcWon = 0;
 
-  for (i = 0; i < 5; i++) {
-    let playerInput = prompt(
-      "Pick one (Rock,Paper or scissors)",
-      ""
-    ).toLowerCase();
-    const player = playerInput;
-    const computer = getComputerChoice();
+  const rock = document.querySelector(".rock");
+  rock.addEventListener("click", () => {
+    const currentRound = document.querySelector(".currentRound");
+    currentRound.textContent = "";
+    playerInput = "rock";
+    playGame(playerInput); // Call playGame with the chosen option
+  });
 
-    let result = playRound(player, computer);
+  const paper = document.querySelector(".paper");
+  paper.addEventListener("click", () => {
+    const currentRound = document.querySelector(".currentRound");
+    currentRound.textContent = "";
+    playerInput = "paper";
+    playGame(playerInput);
+  });
+
+  const scissors = document.querySelector(".scissors");
+  scissors.addEventListener("click", () => {
+    const currentRound = document.querySelector(".currentRound");
+    currentRound.textContent = "";
+    playerInput = "scissors";
+    playGame(playerInput);
+  });
+
+  // Function to play the game with the chosen player input
+  function playGame(chosenOption) {
+    const finalResult = document.querySelector(".result");
+    finalResult.textContent = "";
+
+    const computerChoice = getComputerChoice();
+    const currentRound = document.querySelector(".currentRound");
+    const pcChoice = document.createElement("p");
+    pcChoice.style.color = "coral";
+    pcChoice.style.fontSize = "30px";
+
+    pcChoice.textContent = `Computer Choose ${computerChoice}!`;
+    currentRound.appendChild(pcChoice);
+
+    const result = playRound(chosenOption, computerChoice);
 
     if (result == "You Win!") {
-      playerWin++;
+      playerWon++;
+      const currentRound = document.querySelector(".currentRound");
+      const gStatus = document.createElement("p");
+      gStatus.textContent = "You win this round!";
+      currentRound.appendChild(gStatus);
+
+      const playerScore = document.querySelector(".playerScore");
+      playerScore.textContent = playerWon;
     } else if (result == "You Lose!") {
-      playerWin--;
+      pcWon++;
+      const currentRound = document.querySelector(".currentRound");
+      const gStatus = document.createElement("p");
+      gStatus.textContent = "Computer win this round!";
+      currentRound.appendChild(gStatus);
+
+      const computerScore = document.querySelector(".computerScore");
+      computerScore.textContent = pcWon;
+    } else {
+      const currentRound = document.querySelector(".currentRound");
+      const gStatus = document.createElement("p");
+      gStatus.textContent = "Tie!";
+      currentRound.appendChild(gStatus);
+    }
+    if (playerWon > 4) {
+      const result = document.querySelector(".result");
+      const final = document.createElement("p");
+      final.textContent = "You won the Game!!";
+      result.appendChild(final);
+      setTimeout(function () {
+        window.location.reload();
+      }, 2000);
+    } else if (pcWon > 4) {
+      const result = document.querySelector(".result");
+      const final = document.createElement("p");
+      final.textContent = "You Lose!!";
+      result.appendChild(final);
+      setTimeout(function () {
+        window.location.reload();
+      }, 2000);
     }
   }
-
-  if (playerWin > 0) {
-    return "You Win!";
-  } else if (playerWin < 0) {
-    return "You Lose!";
-  } else {
-    return "Tie!";
-  }
 }
-console.log(playGame());
+
+createGame();
+
+// PlayerScore

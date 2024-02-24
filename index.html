@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="script.js"></script>
-</head>
-<body>
-    
-</body>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Rock Paper Scissors game</h1>
+    </div>
+
+    <!-- Game status -->
+    <div class="status">
+      <div>
+        <p>Player Score: <span class="playerScore"></span></p>
+      </div>
+      <div class="currentRound"></div>
+      <div>
+        <p>Computer Score: <span class="computerScore"></span></p>
+      </div>
+    </div>
+    <!-- R P or S images -->
+    <div class="images">
+      <img
+        src="./images/Rock.png"
+        alt="Rock"
+        class="rock"
+        height="300px"
+        width="200px"
+      />
+      <img
+        src="./images/Paper.png"
+        alt="Paper"
+        class="paper"
+        height="300px"
+        width="200px"
+      />
+      <img
+        src="./images/Scissors.png"
+        alt="Scissors"
+        class="scissors"
+        height="300px"
+        width="200px"
+      />
+    </div>
+
+    <!-- final result -->
+    <div class="result"></div>
+  </body>
 </html>
